@@ -1,11 +1,7 @@
+const path = require('path')
+
 module.exports = {
-  stories: [
-    '../stories/**/*.stories.mdx',
-    '../stories/**/*.stories.@(js|jsx|ts|tsx)',
-    // makes it possible to use files from these folders in the storybook environment
-    '../components/**/*@(js|jsx|ts|tsx)',
-    '../styles/**/*@(css|scss|sass)'
-  ],
+  stories: ['../stories/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
@@ -15,5 +11,15 @@ module.exports = {
   framework: '@storybook/react',
   core: {
     builder: '@storybook/builder-webpack5'
+  },
+  webpackFinal: async (config) => {
+    config.resolve.alias['@components'] = path.resolve(
+      __dirname,
+      '../components'
+    )
+    config.resolve.alias['@pages'] = path.resolve(__dirname, '../pages')
+    config.resolve.alias['@styles'] = path.resolve(__dirname, '../styles')
+
+    return config
   }
 }
