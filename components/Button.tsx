@@ -1,9 +1,16 @@
 import React from 'react'
-import styles from '../styles/Button.module.scss'
+import styles from '@styles/Button.module.scss'
 
-const Button = () => {
+interface ButtonProps {
+  text: string
+  backgroundColor: string
+}
+
+const Button = ({ text, backgroundColor }: ButtonProps) => {
   return (
-    <button className={styles.button}>Button</button>
+    <button style={{ backgroundColor }} className={styles.button}>
+      {text}
+    </button>
   )
 }
 
